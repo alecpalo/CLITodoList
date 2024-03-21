@@ -1,11 +1,24 @@
 import Control.Monad (unless)
+import Text.Read (Lexeme(String))
+
+todo :: [String]
+todo = []
+
+addTask :: String -> [String] -> [String]
+  addTask a todo = todo ++ [a]
+
+printTodo :: [String] -> IO ()
+  printTodo [] return ()
+  printTodo todos = mapM_ putStrLn todos
 
 prompt :: IO ()
 prompt = do
   i <- getLine
-  unless(i == "q") $ do
-    putStrLn("you entered " ++ i ++ ".")
-    prompt
+  if(i == "q") then
+    putStrLn "goodbye!"
+  else
+    addTask i todo
+
 
 main :: IO ()
 main = do
